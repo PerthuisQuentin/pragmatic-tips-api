@@ -15,8 +15,12 @@ const rules = [
 	}
 ]
 
+const resolveAlias = path => Path.resolve(__dirname, path)
+
 const aliases = mode => ({
-	Config: Path.resolve(__dirname, `./config.${mode}.js`),
+	Config: resolveAlias(`./config.${mode}.js`),
+	Logger: resolveAlias('./src/logger'),
+	Constants: resolveAlias('./src/constants/')
 })
 
 module.exports = (env, argv) => {

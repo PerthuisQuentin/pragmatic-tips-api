@@ -1,5 +1,6 @@
 dist/
 node_modules/
+*.log
 
 config.*.js
 !config.template.js
