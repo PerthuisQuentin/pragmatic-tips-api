@@ -1,0 +1,21 @@
+{
+    "env": {
+		"node": true,
+		"es6": true
+	},
+	"extends": [
+		"eslint:recommended"
+	],
+	"parserOptions": {
+		"ecmaVersion": 8,
+		"sourceType": "module"
+	},
+    "rules": {
+		"camelcase": ["warn", { "properties": "always" }],
+        "indent": ["warn", "tab", { "SwitchCase": 1 }],
+		"linebreak-style": ["error", "unix"],
+		"quotes" : ["warn", "single"],
+		"semi":  ["error", "never"],
+		"keyword-spacing": ["warn", { "before": true, "after": true }]
+    }
+}
