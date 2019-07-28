@@ -15,8 +15,13 @@ const rules = [
 	}
 ]
 
+const aliases = mode => ({
+	Config: Path.resolve(__dirname, `./config.${mode}.js`),
+})
+
 module.exports = (env, argv) => {
-	const isProd = argv.mode === 'production'
+	const mode = argv.mode || process.env.NODE_ENV || 'development'
+	const isProd = mode === 'production'
 
 	const config = {
 		target: 'node',
@@ -31,6 +36,7 @@ module.exports = (env, argv) => {
 		externals: [NodeExternals()],
 		resolve: {
 			modules: ['src', 'node_modules'],
+			alias: aliases(mode),
 			extensions: ['.js', '.json']
 		},
 		performance: {
