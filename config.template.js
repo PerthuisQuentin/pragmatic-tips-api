@@ -6,18 +6,28 @@ Without informations, it will fall back to 'development'
 
 module.exports = {
 	// Server
-	port: 8000,
+	port: 8080,
 
 	// Logger
 	// Levels : error | warn | info | verbose | debug | silly
 	logger: {
 		level: 'info',
+		printApiTree: true,
 
-		// Logger in console
-		consoleEnabled: true,
-		consoleLevel: 'info',
+		// Console logs
+		console: {
+			enabled: true,
+			level: 'info'
+		},
 
-		// Logger in files
+		// Requests logs
+		requests: {
+			enabled: true,
+			// Formats : combined | common | dev | short | tiny
+			format: 'combined'
+		},
+	
+		// Files logs
 		// Example : { name: 'error.log', level: 'error' }
 		files: [
 			{

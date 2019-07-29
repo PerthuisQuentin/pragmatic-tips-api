@@ -45,10 +45,10 @@ const customLogger = {
 	transports: []
 }
 
-if (Config.logger.consoleEnabled) {
+if (Config.logger.console.enabled) {
 	customLogger.transports.push(new Winston.transports.Console({
 		format: customFormater,
-		level: Config.logger.consoleLevel
+		level: Config.logger.console.level
 	}))
 }
 
