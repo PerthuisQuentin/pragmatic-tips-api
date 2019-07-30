@@ -2,6 +2,7 @@ import Chalk from 'chalk'
 import { Router } from 'express'
 
 import Log from 'Logger'
+import joiValidation from 'Helpers/validation'
 
 import { HTTP_METHODS_TO_EXPRESS_FUNCTIONS } from 'Constants/httpMethods'
 
@@ -11,13 +12,19 @@ const getEndPointHandlers = endPoint => {
 }
 
 const buildEndpoint = (router, endPoint) => {
-	const middlewares = getEndPointHandlers(endPoint)
+	const middlewares = []
+	
+	if (endPoint.schema) middlewares.push(joiValidation(endPoint.schema))
+	middlewares.push(...getEndPointHandlers(endPoint))
+
 	router[HTTP_METHODS_TO_EXPRESS_FUNCTIONS[endPoint.type]](endPoint.path, ...middlewares)
 }
 
 const printEndPoint = (head, endPoint) => {
-	const middlewares = getEndPointHandlers(endPoint)
-	const message = `${Chalk.blue(HTTP_METHODS_TO_EXPRESS_FUNCTIONS[endPoint.type].toUpperCase())} ${endPoint.path} ${Chalk.gray(`(${middlewares.length} middlewares)`)}`
+	let middlewaresAmount = getEndPointHandlers(endPoint).length
+	if (endPoint.schema) middlewaresAmount++
+
+	const message = `${Chalk.blue(HTTP_METHODS_TO_EXPRESS_FUNCTIONS[endPoint.type].toUpperCase())} ${endPoint.path} ${Chalk.gray(`(${middlewaresAmount} middlewares)`)}`
 	Log.info(`${Chalk.yellow('[API]')} ${head}${message}`)
 }
 

@@ -20,8 +20,10 @@ const resolveAlias = path => Path.resolve(__dirname, path)
 const aliases = mode => ({
 	Config: resolveAlias(`./config.${mode}.js`),
 	Constants: resolveAlias('./src/constants/'),
+	Data: resolveAlias('./data/'),
 	Helpers: resolveAlias('./src/helpers/'),
-	Logger: resolveAlias('./src/logger')
+	Logger: resolveAlias('./src/logger'),
+	Tips: resolveAlias('./src/tips')
 })
 
 module.exports = (env, argv) => {
